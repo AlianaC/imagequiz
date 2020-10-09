@@ -10,7 +10,8 @@ import './App.css';
 
 function App() {
   return (
-    <BrowserRouter>
+    <div>hello, welcome to my page</div>
+    /*<BrowserRouter>
       <Switch>
         <Route exact path='/'>
           <Home />
@@ -19,7 +20,7 @@ function App() {
           <Login />
         </Route>
       </Switch>
-    </BrowserRouter>
+    </BrowserRouter>*/
   );
 }
 
