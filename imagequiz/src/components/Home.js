@@ -1,35 +1,58 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 
 import './Home.css';
 class Home extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            username: ''
+            username: '',
+            showLoginForm: false,
+            authenticated: false
         };
     }
 
+    login = () => {
+        this.setState({showLoginForm:true});
+    }
 
+    onSubmit = (event) => {
+        if(this.state.username.trim().length > 0){
+            this.setState({authenticated: true});
+        }
+        event.preventDefault();
+    }
+
+    onInputChange = (event) => {
+        const value = event.target.value;
+        const name = event.target.name;
+        this.setState({[name]: value});
+    }
 
     render() {
-        let username = '';
-        const location = this.props.location;
-        if (location) {
-            if (location.state) {
-                if (location.state.user) {
-                    username = location.state.user;
-                }
-            }
+        if((!this.state.authenticated) && this.state.showLoginForm){
+            return(
+                <div>
+                    <form onSubmit={this.onSubmit}>
+                        <label>Username: </label>
+                        <input 
+                        type="text" 
+                        name="username"
+                        value={this.state.username}
+                        onChange={this.onInputChange}
+                        ></input>
+                        <button type="submit">Login</button>
+                    </form>  
+                </div>
+            );
         }
 
         return (
             <div>
                 <div className="loginButton">
-                    {username.length > 0 ? username
-                        : <Link to='/login'>Login</Link>}
+                    {this.state.authenticated ? this.state.username
+                    : <button onClick={this.login}>Login</button>}   
                 </div>
-                <div>hello from my homepage!</div>
+                <div>hello from my homepage</div>
             </div>
         );
     }
