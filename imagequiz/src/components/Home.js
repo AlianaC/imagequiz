@@ -1,13 +1,23 @@
 import React from 'react';
-
 import './Home.css';
+
 class Home extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
             username: '',
             showLoginForm: false,
-            authenticated: false
+            authenticated: false,
+            flowers: [
+                {id: 1, name: 'Daffodil', img: '/images/daffodil.png'},
+                {id: 2, name: 'Cherry Blossom', img: '/images/cherryblossom.png'},
+                {id: 3, name: 'Lily', img: '/images/lily.jpg'},
+                {id: 4, name: 'Daisy', img: '/images/daisy.jpg'},
+                {id: 5, name: 'Sunflower', img: '/images/sunflower.png'},
+                {id: 6, name: 'Tulip', img: '/images/tulip.png'},
+                {id: 7, name: 'Rose', img: '/images/rose.png'},
+                {id: 8, name: 'Water Lily', img: '/images/waterlily.png'}
+            ]
         };
     }
 
@@ -26,6 +36,20 @@ class Home extends React.Component {
         const value = event.target.value;
         const name = event.target.name;
         this.setState({[name]: value});
+    }
+
+    makeFlowerGrid = () => {
+        return this.state.flowers.map((flower) => {
+            const{id, name, img} = flower
+            return(
+                <tr key={id}>
+                    <td>
+                        <img src={process.env.PUBLIC_URL + img}></img>
+                        <p>{name}</p>
+                    </td>
+                </tr>
+            );
+        })
     }
 
     render() {
@@ -53,6 +77,11 @@ class Home extends React.Component {
                     : <button onClick={this.login}>Login</button>}   
                 </div>
                 <div>hello from my homepage</div>
+                <table id='flowers'>
+                    <tbody>
+                    {this.makeFlowerGrid()}
+                    </tbody>
+                </table>
             </div>
         );
     }
