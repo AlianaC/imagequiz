@@ -9,14 +9,14 @@ class Home extends React.Component {
             showLoginForm: false,
             authenticated: false,
             flowers: [
-                {id: 1, name: 'Daffodil', img: '/images/daffodil.png'},
-                {id: 2, name: 'Cherry Blossom', img: '/images/cherryblossom.png'},
-                {id: 3, name: 'Lily', img: '/images/lily.jpg'},
-                {id: 4, name: 'Daisy', img: '/images/daisy.jpg'},
-                {id: 5, name: 'Sunflower', img: '/images/sunflower.png'},
-                {id: 6, name: 'Tulip', img: '/images/tulip.png'},
-                {id: 7, name: 'Rose', img: '/images/rose.png'},
-                {id: 8, name: 'Water Lily', img: '/images/waterlily.png'}
+                {name: 'Daffodil', img: '/images/daffodil.png'},
+                {name: 'Cherry Blossom', img: '/images/cherryblossom.png'},
+                {name: 'Lily', img: '/images/lily.jpg'},
+                {name: 'Daisy', img: '/images/daisy.jpg'},
+                {name: 'Sunflower', img: '/images/sunflower.png'},
+                {name: 'Tulip', img: '/images/tulip.png'},
+                {name: 'Rose', img: '/images/rose.png'},
+                {name: 'Water Lily', img: '/images/waterlily.png'}
             ]
         };
     }
@@ -39,17 +39,23 @@ class Home extends React.Component {
     }
 
     makeFlowerGrid = () => {
-        return this.state.flowers.map((flower) => {
-            const{id, name, img} = flower
-            return(
-                <tr key={id}>
-                    <td>
-                        <img src={process.env.PUBLIC_URL + img}></img>
-                        <p>{name}</p>
-                    </td>
-                </tr>
-            );
-        })
+        let flowers = this.state.flowers;
+        let grid = []
+        let row = []
+        for (let i = 0; i < flowers.length; i++){
+            let{name, img} = flowers[i]
+            if(row.length == 4){
+                grid.push(<tr>{row}</tr>)
+                row = []
+            }
+            row.push(<td>
+                <img src={process.env.PUBLIC_URL + img}></img>
+                <p>{name}</p>
+                </td>)
+            
+        }
+        grid.push(<tr>{row}</tr>)
+        return grid
     }
 
     render() {
