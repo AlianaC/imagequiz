@@ -83,7 +83,7 @@ class Home extends React.Component {
                     : <button onClick={this.login}>Login</button>}   
                 </div>
                 <div><h3>Hello, From My Homepage</h3></div>
-                <table id='flowers'>
+                <table className='flowerTable'>
                     <tbody>
                     {this.makeFlowerGrid()}
                     </tbody>
