@@ -1,13 +1,14 @@
 import React from 'react';
 import './Home.css';
+import { Link } from 'react-router-dom';
+
+
 
 class Home extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
             username: '',
-            showLoginForm: false,
-            authenticated: false,
             flowers: [
                 {name: 'Daffodil', img: '/images/daffodil.png'},
                 {name: 'Cherry Blossom', img: '/images/cherryblossom.png'},
@@ -21,36 +22,22 @@ class Home extends React.Component {
         };
     }
 
-    login = () => {
-        this.setState({showLoginForm:true});
-    }
-
-    onSubmit = (event) => {
-        if(this.state.username.trim().length > 0){
-            this.setState({authenticated: true});
-        }
-        event.preventDefault();
-    }
-
-    onInputChange = (event) => {
-        const value = event.target.value;
-        const name = event.target.name;
-        this.setState({[name]: value});
-    }
-
     makeFlowerGrid = () => {
         let flowers = this.state.flowers;
         let grid = []
         let row = []
         for (let i = 0; i < flowers.length; i++){
             let{name, img} = flowers[i]
-            if(row.length == 4){
+            if(row.length === 4){
                 grid.push(<tr>{row}</tr>)
                 row = []
             }
+            let quiz = {pathname: "/quiz", state: {flowerName: name, flowerImg: img}};
             row.push(
                 <td>
+                <Link to={quiz}>
                 <img src={process.env.PUBLIC_URL + img} alt="flower"></img>
+                </Link>
                 <p className="flowerName">{name}</p>
                 </td>
             )
@@ -61,30 +48,23 @@ class Home extends React.Component {
     }
 
     render() {
-        if((!this.state.authenticated) && this.state.showLoginForm){
-            return(
-                <div>
-                    <form onSubmit={this.onSubmit}>
-                        <label>Username: </label>
-                        <input 
-                        type="text" 
-                        name="username"
-                        value={this.state.username}
-                        onChange={this.onInputChange}
-                        ></input>
-                        <button type="submit">Login</button>
-                    </form>  
-                </div>
-            );
+        let username = "";
+        const location = this.props.location;
+        if(location){
+            if(location.state){
+                if(location.state.user){
+                    username = location.state.user;
+                }
+            }
         }
 
         return (
             <div>
                 <div className="loginButton">
-                    {this.state.authenticated ? this.state.username
-                    : <button onClick={this.login}>Login</button>}   
+                    {username.length > 0 ? username
+                    : <Link to="/login"><button type="text">Login</button></Link>}   
                 </div>
-                <div><h3>Hello, From My Homepage</h3></div>
+                <h3 className="homepageHeader">Image Quiz Homepage</h3>
                 <table className="flowerTable">
                     <tbody>
                     {this.makeFlowerGrid()}

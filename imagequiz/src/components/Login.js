@@ -1,7 +1,8 @@
 import React from 'react';
+import './Login.css';
 import { Redirect } from 'react-router-dom';
 
-class Login extends React.Component {
+class Login extends React.Component{
     constructor(props) {
         super(props);
         this.state = {
@@ -9,10 +10,9 @@ class Login extends React.Component {
             authenticated: false
         };
     }
-
     onSubmit = (event) => {
-        if (this.state.username.trim().length > 0) {
-            this.setState({ authenticated: true });
+        if(this.state.username.trim().length > 0){
+            this.setState({authenticated: true});
         }
         event.preventDefault();
     }
@@ -20,31 +20,29 @@ class Login extends React.Component {
     onInputChange = (event) => {
         const value = event.target.value;
         const name = event.target.name;
-        this.setState({ [name]: value });
+        this.setState({[name]: value});
     }
 
     render() {
-        let from = { pathname: '/', state: { user: this.state.username } };
-
-        if (this.state.authenticated) {
+        let from = {pathname: "/", state: {user: this.state.username}};
+        if(this.state.authenticated){
             return (
                 <Redirect to={from} />
             );
-
         }
 
-        return (
-            <div>
+        return(
+            <div className="loginPage">
                 <form onSubmit={this.onSubmit}>
-                    <lable>Username:</lable>
-                    <input
-                        type="text"
-                        name="username"
-                        value={this.state.username}
-                        onChange={this.onInputChange}
+                    <label>Username: </label>
+                    <input 
+                    type="text" 
+                    name="username"
+                    value={this.state.username}
+                    onChange={this.onInputChange}
                     ></input>
                     <button type="submit">Login</button>
-                </form>
+                </form>  
             </div>
         );
     }

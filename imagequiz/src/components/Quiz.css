@@ -1,0 +1,45 @@
+.quizHeader {
+    text-align: center;
+}
+
+.quizSec {
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+    height: 250px;
+    width: 550px;
+}
+
+.flowerImg {
+    float: left;
+    margin-top: 45px;
+    height: 200px;
+    padding: 10px;
+}
+
+.quizQuestions {
+    float: right;
+}
+
+.questionText {
+    text-align: top;
+    float: right;
+    margin-right: 20px;
+}
+
+.answerSec {
+    width: 200px;
+    float: right;
+    display: block;
+    margin-right: 40px;
+}
+
+.ansB {
+    display: block;
+    background-color: paleturquoise;
+    border: 1px solid cornflowerblue;
+    border-radius: 15px;
+    padding: 10px 24px;
+    width: 80%;
+    margin: 10px;
+}

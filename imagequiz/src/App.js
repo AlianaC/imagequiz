@@ -1,14 +1,29 @@
 import React from 'react';
+import {
+    BrowserRouter,
+    Switch,
+    Route
+} from "react-router-dom";
 import Home from './components/Home';
+import Login from './components/Login';
+import Quiz from './components/Quiz';
 import './App.css';
 
 function App() {
-  return (
-    <div className="App">
-      <Home />
-    </div>
+    return (
+        <BrowserRouter>
+            <Switch>
+                <Route path="/login">
+                    <Login />
+                </Route>
+                <Route path="/quiz" render={props => <Quiz {...props} />}>
+                </Route>
+                <Route path="/" render={props => <Home {...props} />}>
+                </Route>
+            </Switch>
+        </BrowserRouter>
 
-  );
+    );
 }
 
 export default App;
