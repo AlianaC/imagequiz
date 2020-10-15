@@ -48,10 +48,12 @@ class Home extends React.Component {
                 grid.push(<tr>{row}</tr>)
                 row = []
             }
-            row.push(<td>
-                <img src={process.env.PUBLIC_URL + img}></img>
-                <p>{name}</p>
-                </td>)
+            row.push(
+                <td>
+                <img src={process.env.PUBLIC_URL + img} alt="flower"></img>
+                <p className="flowerName">{name}</p>
+                </td>
+            )
             
         }
         grid.push(<tr>{row}</tr>)
@@ -83,7 +85,7 @@ class Home extends React.Component {
                     : <button onClick={this.login}>Login</button>}   
                 </div>
                 <div><h3>Hello, From My Homepage</h3></div>
-                <table className='flowerTable'>
+                <table className="flowerTable">
                     <tbody>
                     {this.makeFlowerGrid()}
                     </tbody>
