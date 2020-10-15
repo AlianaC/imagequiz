@@ -82,7 +82,7 @@ class Home extends React.Component {
                     {this.state.authenticated ? this.state.username
                     : <button onClick={this.login}>Login</button>}   
                 </div>
-                <div>hello from my homepage</div>
+                <div><h3>Hello, From My Homepage</h3></div>
                 <table id='flowers'>
                     <tbody>
                     {this.makeFlowerGrid()}
