@@ -7,13 +7,15 @@
     margin-left: auto;
     margin-right: auto;
     height: 250px;
-    width: 550px;
+    width: 600px;
 }
 
 .flowerImg {
     float: left;
+    object-fit: cover;
     margin-top: 45px;
     height: 200px;
+    width: 250px;
     padding: 10px;
 }
 

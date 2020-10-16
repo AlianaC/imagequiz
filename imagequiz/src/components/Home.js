@@ -32,7 +32,7 @@ class Home extends React.Component {
                 grid.push(<tr>{row}</tr>)
                 row = []
             }
-            let quiz = {pathname: "/quiz", state: {flowerName: name, flowerImg: img}};
+            let quiz = {pathname: "/quiz", state: {flowerName: name}};
             row.push(
                 <td>
                 <Link to={quiz}>
@@ -64,7 +64,7 @@ class Home extends React.Component {
                     {username.length > 0 ? username
                     : <Link to="/login"><button type="text">Login</button></Link>}   
                 </div>
-                <h3 className="homepageHeader">Image Quiz Homepage</h3>
+                <h2 className="homepageHeader">Image Quiz Homepage</h2>
                 <table className="flowerTable">
                     <tbody>
                     {this.makeFlowerGrid()}
