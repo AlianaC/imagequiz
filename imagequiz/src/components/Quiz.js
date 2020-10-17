@@ -25,10 +25,6 @@ class Quiz extends React.Component{
         }
     }
 
-    tryAgain = () => {
-        window.location.reload();
-    }
-
     render(){
         let flowerName = "";
         const location = this.props.location;
@@ -49,6 +45,7 @@ class Quiz extends React.Component{
             questions = quiz3;
         }
 
+        let quizLink = {pathname: "/quiz", state: {flowerName: flowerName}};
 
         return(
             <div>
@@ -62,11 +59,12 @@ class Quiz extends React.Component{
                         className="endB">Home
                         </button>
                         </Link>
+                        <Link to={quizLink}>
                         <button 
                         type="text" 
-                        onClick={this.tryAgain}
                         className="endB">Try Again
                         </button>
+                        </Link>
                     </div>
                 ) : (
                 <div className="quizSec">
