@@ -25,6 +25,10 @@ class Quiz extends React.Component{
         }
     }
 
+    tryAgain = () => {
+        window.location.reload(false);
+    }
+
     render(){
         let flowerName = "";
         const location = this.props.location;
@@ -62,7 +66,8 @@ class Quiz extends React.Component{
                         <Link to={quizLink}>
                         <button 
                         type="text" 
-                        className="endB">Try Again
+                        className="endB"
+                        onClick={this.tryAgain}>Try Again
                         </button>
                         </Link>
                     </div>
@@ -117,7 +122,7 @@ const quiz1 = [
     },
     {
         question: "What is the name of the insect?",
-        image: "/images/LadyBug.jpg",
+        image: "/images/Ladybug.jpg",
         answers: [
             {answerText: "Fly", correct: false},
             {answerText: "Grasshopper", correct: false},
@@ -263,7 +268,7 @@ const quiz3 = [
     },
     {
         question: "What is the name of this insect?",
-        image: "/images/HoneyBee.jpg",
+        image: "/images/Honeybee.jpg",
         answers: [
             {answerText: "Honey Bee", correct: true},
             {answerText: "Wasp", correct: false},
