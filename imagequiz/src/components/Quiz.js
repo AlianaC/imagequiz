@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import './Quiz.css';
 
 class Quiz extends React.Component{
@@ -22,6 +23,10 @@ class Quiz extends React.Component{
         }else{
             this.setState({showScore: true});
         }
+    }
+
+    tryAgain = () => {
+        window.location.reload();
     }
 
     render(){
@@ -50,7 +55,18 @@ class Quiz extends React.Component{
                 <h2 className="quizHeader">Image Quiz</h2>
                 {this.state.showScore ? (
                     <div className="scoreSec">
-                        You scored {this.state.score} out of 6
+                        <h4>You scored {this.state.score} out of 6</h4>
+                        <Link to="/">
+                        <button 
+                        type="text"
+                        className="endB">Home
+                        </button>
+                        </Link>
+                        <button 
+                        type="text" 
+                        onClick={this.tryAgain}
+                        className="endB">Try Again
+                        </button>
                     </div>
                 ) : (
                 <div className="quizSec">
@@ -163,7 +179,7 @@ const quiz2 = [
         ],
     },
     {
-        question: "What tree is pictured?",
+        question: "What type of tree is pictured?",
         image: "/images/LemonTree.jpg",
         answers: [
             {answerText: "Pine Tree", correct: false},
@@ -226,7 +242,7 @@ const quiz3 = [
         ],
     },
     {
-        question: "What is the name of this puppy?",
+        question: "What is the breed of this puppy?",
         image: "/images/ScottishTerrier.jpg",
         answers: [
             {answerText: "Maltese", correct: false},
@@ -256,7 +272,7 @@ const quiz3 = [
         ],
     },
     {
-        question: "What is the name of this puppy?",
+        question: "What is the breed of this puppy?",
         image: "/images/ShihTzu.jpg",
         answers: [
             {answerText: "Shih Tzu", correct: true},
