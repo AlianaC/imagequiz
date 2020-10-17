@@ -75,7 +75,9 @@ class Quiz extends React.Component{
                     class="flowerImg" 
                     alt="flower"></img>
                     <div className="quizQuestions">
-                        <h4 className="questionText">{questions[this.state.currQ].question}</h4>
+                        <h4 className="questionText">
+                            {this.state.currQ + 1}) {questions[this.state.currQ].question}
+                        </h4>
                     </div>
                     <div className="answerSec">
                     {questions[this.state.currQ].answers.map((answer) => (
