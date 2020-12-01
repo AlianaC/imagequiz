@@ -1,6 +1,7 @@
 import React from 'react';
 import './Home.css';
 import { Link } from 'react-router-dom';
+import server from '../ServerInterface/server.js';
 
 
 
@@ -9,15 +10,16 @@ class Home extends React.Component {
         super(props);
         this.state = {
             username: '',
+            data: [],
             flowers: [
                 {name: 'Daffodil', img: '/images/daffodil.png'},
                 {name: 'Cherry Blossom', img: '/images/cherryblossom.png'},
-                {name: 'Lily', img: '/images/lily.jpg'},
-                {name: 'Daisy', img: '/images/daisy.jpg'},
-                {name: 'Sunflower', img: '/images/sunflower.png'},
-                {name: 'Tulip', img: '/images/tulip.png'},
-                {name: 'Rose', img: '/images/rose.png'},
-                {name: 'Water Lily', img: '/images/waterlily.png'}
+                {name: 'Lily', img: '/images/lily.jpg'}
+                //{name: 'Daisy', img: '/images/daisy.jpg'},
+                //{name: 'Sunflower', img: '/images/sunflower.png'},
+                //{name: 'Tulip', img: '/images/tulip.png'},
+                //{name: 'Rose', img: '/images/rose.png'},
+                //{name: 'Water Lily', img: '/images/waterlily.png'}
             ]
         };
     }
@@ -47,6 +49,43 @@ class Home extends React.Component {
         return grid
     }
 
+    componentDidMount() {
+        this.setState({data: server.getQuizzes()})
+        //server.getQuizzes().then(data => this.setState({data: data}));
+    }
+
+    body = () => {
+        let username = "";
+        const location = this.props.location;
+        if(location){
+            if(location.state){
+                if(location.state.user){
+                    username = location.state.user;
+                }
+            }
+        }
+
+        return (
+            <div>
+                {this.state.data.length > 0 ?
+                    <div>
+                        {this.state.data.map((q, i) =>
+                            <div className="pictureDiv" key={i}>
+                                <Link className="qLink" to={{
+                                    pathname: "\quiz", state:
+                                    {id: q.id, user: username}
+                                }}>
+                                <img src={process.env.PUBLIC_URL + q.picture} alt="flower"></img>
+                                </Link>
+                                <figcaption className="flowerName"><b>{q.name}</b></figcaption>
+                            </div>
+                        )}
+                    </div>
+                : ""}
+            </div>
+        );
+    }
+
     render() {
         let username = "";
         const location = this.props.location;
@@ -67,7 +106,7 @@ class Home extends React.Component {
                 <h2 className="homepageHeader">Image Quiz Homepage</h2>
                 <table className="flowerTable">
                     <tbody>
-                    {this.makeFlowerGrid()}
+                    {this.body()}
                     </tbody>
                 </table>
             </div>
