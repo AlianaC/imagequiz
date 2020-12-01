@@ -11,16 +11,6 @@ class Home extends React.Component {
         this.state = {
             username: '',
             data: [],
-            flowers: [
-                {name: 'Daffodil', img: '/images/daffodil.png'},
-                {name: 'Cherry Blossom', img: '/images/cherryblossom.png'},
-                {name: 'Lily', img: '/images/lily.jpg'}
-                //{name: 'Daisy', img: '/images/daisy.jpg'},
-                //{name: 'Sunflower', img: '/images/sunflower.png'},
-                //{name: 'Tulip', img: '/images/tulip.png'},
-                //{name: 'Rose', img: '/images/rose.png'},
-                //{name: 'Water Lily', img: '/images/waterlily.png'}
-            ]
         };
     }
 
@@ -50,8 +40,8 @@ class Home extends React.Component {
     }
 
     componentDidMount() {
-        this.setState({data: server.getQuizzes()})
-        //server.getQuizzes().then(data => this.setState({data: data}));
+        //this.setState({data: server.getQuizzes()})
+        server.getQuizzes().then(data => this.setState({data: data})).catch(e => console.log(e));
     }
 
     body = () => {

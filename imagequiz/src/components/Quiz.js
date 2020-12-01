@@ -21,7 +21,7 @@ class Quiz extends React.Component{
             this.setState({score: curr});
         }
         let numQ = this.state.currQ + 1;
-        if(numQ < this.state.data.questions.length){
+        if(numQ < this.state.data.length){
             this.setState({currQ: numQ});
         }else{
             this.setState({showScore: true});
@@ -29,26 +29,26 @@ class Quiz extends React.Component{
     }
 
     tryAgain = () => {
+        server.saveScore(this.props.location.state.user, this.props.location.state.id, this.state.score).catch(e => console.log(e));
         this.setState({score: 0, showScore: false, currQ: 0});
     }
 
     showQuestion = () => {
-        let data = this.state.data;
-        if(data.length !== 0){
-            console.log(this.state.data.id);
+        let questions = this.state.data;
+        if(questions.length !== 0){
             return (
                 <div className="quizSec">
                     <img 
-                    src={process.env.PUBLIC_URL + data.questions[this.state.currQ].image} 
+                    src={process.env.PUBLIC_URL + questions[this.state.currQ].image} 
                     class="flowerImg" 
                     alt="flower"></img>
                     <div className="quizQuestions">
                         <h4 className="questionText">
-                            {this.state.currQ + 1}) {data.questions[this.state.currQ].question}
+                            {this.state.currQ + 1}) {questions[this.state.currQ].question}
                         </h4>
                     </div>
                     <div className="answerSec">
-                    {data.questions[this.state.currQ].answers.map((answer) => (
+                    {questions[this.state.currQ].answers.map((answer) => (
                         <button 
                         className="ansB" 
                         type="text"
@@ -68,7 +68,8 @@ class Quiz extends React.Component{
         if(location){
             if(location.state){
                 if(location.state.id){
-                    this.setState({data: server.getQuiz(this.props.location.state.id)});    
+                    server.getQuiz(location.state.id).then(data => this.setState({data: data})).catch(e => console.log(e));
+                    console.log(this.state.data);
                 }
             }
         }
@@ -78,7 +79,7 @@ class Quiz extends React.Component{
 
         return(
             <div>
-                <h2 className="quizHeader">{this.state.data.name}</h2>
+                <h2 className="quizHeader">Image Quiz</h2>
                 {this.state.showScore ? (
                     <div className="scoreSec">
                         <h4>You scored {this.state.score} out of 6</h4>
